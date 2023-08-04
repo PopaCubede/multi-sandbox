@@ -1,0 +1,31 @@
+{
+  "logs": {
+    "baseUrl": "http://address-book-elasticsearch:9200",
+    "index": "logs",
+    "authKey": ""
+  },
+  "address_book_v3": {
+    "baseUrl": "http://address-book-elasticsearch:9200",
+    "index": "address-book-v3-group",
+    "authKey": ""
+  },
+  "audits": {
+    "baseUrl": "http://address-book-elasticsearch:9200",
+    "index": "audit",
+    "authKey": ""
+  },
+  "apm": {
+    "activated": false
+  },
+  "address_book": {
+    "url": "http://solr.test.yoctu.solutions:8983/solr",
+    "Authorization": "Basic c29scjp5b2N0dQ==",
+    "dbName": "address-book"
+  },
+  "logLevel": "trace",
+  "gracefullyStopSignals": [
+    "SIGINT",
+    "SIGTERM"
+  ],
+  "bodyLimit": 1048576
+}

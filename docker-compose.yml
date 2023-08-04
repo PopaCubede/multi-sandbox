@@ -1,0 +1,55 @@
+version: '3'
+
+networks:
+  address-book-network:
+    driver: bridge
+
+volumes:
+  address-book-elasticsearch-volume:
+
+services:
+  address-book-elasticsearch:
+    container_name: address-book-elasticsearch
+    image: bitnami/elasticsearch:latest
+    environment:
+      - ELASTICSEARCH_PORT_NUMBER=9200
+      - ELASTICSEARCH_NODE_NAME=elastic
+      - BITNAMI_DEBUG=true
+    ports:
+      - '9200:9200'
+    healthcheck:
+      test: curl -u elastic:elastic -s -f http://address-book-elasticsearch:9200/_cat/health >/dev/null || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 5
+    volumes:
+      - address-book-elasticsearch-volume:/usr/share/elasticsearch/data
+    networks:
+      - address-book-network
+
+  address-book-kibana:
+    container_name: address-book-kibana
+    image: bitnami/kibana:latest
+    ports:
+      - '5601:5601'
+    depends_on:
+      address-book-elasticsearch:
+        condition: service_healthy
+    environment:
+      - KIBANA_ELASTICSEARCH_URL=http://address-book-elasticsearch:9200
+    networks:
+      - address-book-network
+
+  address-book-solr:
+    container_name: address-book-solr
+    # image: solr:8.9
+    build: migration-scripts
+    ports:
+      - '8983:8983'
+    networks:
+      - address-book-network
+    volumes:
+      - ./migration-scripts/solr-replication/solr_data:/var/solr/data/address-book-v3/conf
+    command:
+      - solr-precreate
+      - address-book-v3

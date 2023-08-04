@@ -1,0 +1,17 @@
+{
+    "address_book_v3": {
+        "baseUrl": "http://address-book-elasticsearch:9200",
+        "index": "address-book-v3-group",
+        "authKey": ""
+    },
+    "address_book_to_get_from": {
+        "url": "http://solr.test.yoctu.solutions:8983/solr",
+        "Authorization": "Basic c29scjp5b2N0dQ==",
+        "dbName": "address-book"
+    },
+    "address_book_to_insert_to": {
+        "url": "http://address-book-solr:8983/solr",
+        "Authorization": "",
+        "dbName": "address-book-v3"
+    }
+}
