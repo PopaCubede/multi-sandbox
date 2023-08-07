@@ -42,8 +42,9 @@ services:
 
   address-book-solr:
     container_name: address-book-solr
-    # image: solr:8.9
-    build: migration-scripts
+    build:
+      context: .
+      dockerfile: migration-scripts/Dockerfile
     ports:
       - '8983:8983'
     networks:
@@ -53,7 +54,6 @@ services:
       - ./migration-scripts/solr-replication/schema.json:/opt/solr/server/solr/mycores/mycore/conf/schema.json
       - ./migration-scripts/solr-replication/data.json:/opt/solr/server/solr/mycores/mycore/data/data.json
       - ./migration-scripts/solr-replication/solr-init.sh:/opt/solr-init.sh
-    entrypoint: ["/bin/bash", "/opt/solr-init.sh"]
     command:
       - solr-precreate
       - address-book-v3
