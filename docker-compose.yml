@@ -53,7 +53,6 @@ services:
       - ./migration-scripts/solr-replication/solr_data:/var/solr/data/address-book-v3/conf
       - ./migration-scripts/solr-replication/schema.json:/opt/solr/server/solr/mycores/mycore/conf/schema.json
       - ./migration-scripts/solr-replication/data.json:/opt/solr/server/solr/mycores/mycore/data/data.json
-      - ./migration-scripts/solr-replication/solr-init.sh:/opt/solr-init.sh
     command:
       - solr-precreate
       - address-book-v3
