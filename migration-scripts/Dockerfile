@@ -9,4 +9,4 @@ COPY --chown=solr:solr ./solr-replication/solr_data /solr_data
 RUN chmod +x /var/solr/entrypoint.sh && chown -R solr:solr /var/solr && chown -R solr:solr /opt/solr-8.9.0
 
 USER solr
-ENTRYPOINT ["/var/solr/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/opt/solr-init.sh"]
