@@ -14,7 +14,12 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
     # exit 1
 fi
 
-RUN mkdir -p /var/solr/data/address-book && chown -R root:root /var/solr/data
+mkdir -p /var/solr/data/address-book
+
+# Adjust ownership and permissions
+chown -R solr:solr /var/solr
+chown -R solr:solr /var/solr/data
+chown -R solr:solr /var/solr/data/address-book
 
 # Check if the 'address-book' core already exists
 if [ ! -d "/opt/solr/server/solr/address-book" ]; then
@@ -26,13 +31,10 @@ if [ ! -d "/opt/solr/server/solr/address-book" ]; then
 fi
 
 # Load schema (This is a placeholder, you might need to adjust based on how you want to use the schema.json with Solr's Config API)
-curl "http://address-book-solr:8983/solr/address-book/config" -d '@/opt/solr/server/solr/configsets/address-book/conf/schema.json'
+curl "http://address-book-solr:8983/solr/address-book/config" -d '@/var/solr/data/address-book/schema.json'
 
 # Post data to Solr
-/opt/solr/bin/post -c address-book /opt/solr/server/solr/configsets/address-book/data/data.json
-
-# Adjust ownership and permissions
-# chown -R solr:solr /var/solr/data
+/opt/solr/bin/post -c address-book /var/solr/data/address-book/data.json
 
 # Start Solr in the foreground
 exec solr-foreground
