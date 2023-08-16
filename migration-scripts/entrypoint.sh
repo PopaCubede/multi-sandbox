@@ -2,7 +2,7 @@
 
 # Wait for Solr to start
 RETRY_COUNT=0
-MAX_RETRIES=10  # Adjust as needed
+MAX_RETRIES=15  # Adjust as needed
 until $(curl --output /dev/null --silent --head --fail http://address-book-solr:8983/solr/admin/ping) || [ $RETRY_COUNT -eq $MAX_RETRIES ]; do
     printf '.'
     sleep 10  # Increased sleep duration
@@ -14,7 +14,7 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
     # exit 1
 fi
 
-RUN mkdir -p /var/solr/data/address-book && chown -R solr:solr /var/solr/data
+RUN mkdir -p /var/solr/data/address-book && chown -R root:root /var/solr/data
 
 # Check if the 'address-book' core already exists
 if [ ! -d "/opt/solr/server/solr/address-book" ]; then
@@ -22,7 +22,7 @@ if [ ! -d "/opt/solr/server/solr/address-book" ]; then
     solr create -c address-book -d /var/solr/data/address-book
 
     # Import data into the 'address-book' core (adjust path as needed)
-    /opt/solr/bin/post -c address-book /path/to/your/data.json
+    /opt/solr/bin/post -c address-book /var/solr/data/address-book/data.json
 fi
 
 # Load schema (This is a placeholder, you might need to adjust based on how you want to use the schema.json with Solr's Config API)
