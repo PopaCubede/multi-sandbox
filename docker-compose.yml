@@ -8,6 +8,26 @@ volumes:
   address-book-elasticsearch-volume:
 
 services:
+  address-book:
+    container_name: address-book
+    # image: node:18-alpine
+    build: .
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    environment:
+      - PORT=3024
+      - NODE_ENV=development
+      - CONFIG_PATH=config.json
+    ports:
+      - '3024:3024'
+    depends_on:
+      address-book-elasticsearch:
+        condition: service_healthy
+    command: [ "npm", "run", "start" ]
+    networks:
+      - address-book-network
+
   address-book-elasticsearch:
     container_name: address-book-elasticsearch
     image: bitnami/elasticsearch:latest
@@ -47,12 +67,14 @@ services:
       dockerfile: migration-scripts/Dockerfile
     ports:
       - '8983:8983'
+    # environment:
+    #   - SOLR_HOME=/var/solr
     networks:
       - address-book-network
     volumes:
-      - ./migration-scripts/solr-replication/solr_data:/var/solr/data/address-book-v3/conf
-      - ./migration-scripts/solr-replication/schema.json:/opt/solr/server/solr/mycores/mycore/conf/schema.json
-      - ./migration-scripts/solr-replication/data.json:/opt/solr/server/solr/mycores/mycore/data/data.json
+      - ./migration-scripts/solr-replication/solr_data:/var/solr/data/address-book
+      # - ./migration-scripts/solr-replication/schema.json:/opt/solr/server/solr/configsets/address-book/conf/schema.json
+      # - ./migration-scripts/solr-replication/data.json:/opt/solr/server/solr/configsets/address-book/data/data.json
     command:
       - solr-precreate
-      - address-book-v3
+      - address-book
