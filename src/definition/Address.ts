@@ -27,4 +27,4 @@ interface SolrAddress extends AddressDto {
     signature: string;
 }
 
-export { ShipperId, ShipperParams, SolrAddress, AddressDto };
+export { AddressDto, ShipperId, ShipperParams, SolrAddress };

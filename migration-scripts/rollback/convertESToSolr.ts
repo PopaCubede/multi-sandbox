@@ -11,18 +11,18 @@ export const convertESToSolr = (esDoc: ElasticDocGroupRollbackable): SolrAddress
     const solrAddresses: SolrAddress[] = [];
 
     esDoc.addresses.forEach((esAddress: ElasticAddress) => {
-        if (esAddress.contacts) {
+        if (esAddress?.contacts?.length !== 0) {
             esAddress.contacts?.forEach((esContact: ElasticContact) => {
                 const solrAddress: SolrAddress = {
                     owner: esDoc.groupId,
-                    alias: esAddress.alias,
+                    alias: esAddress.alias ?? '',
                     contact_company: esContact.company,
                     contact_phone_number: esContact.phone_number,
                     contact_email: esContact.email,
                     contact_name: esContact.name,
-                    address_additional_street: esAddress.additional_street,
+                    address_additional_street: esAddress.additional_street ?? '',
                     address_country: esAddress.country,
-                    address_province: esAddress.province,
+                    address_province: esAddress.province ?? '',
                     address_zip_code: esAddress.zip_code ?? '',
                     address_city: esAddress.city,
                     address_street: esAddress.street,
@@ -37,10 +37,10 @@ export const convertESToSolr = (esDoc: ElasticDocGroupRollbackable): SolrAddress
         } else {
             const solrAddress: SolrAddress = {
                 owner: esDoc.groupId,
-                alias: esAddress.alias,
-                address_additional_street: esAddress.additional_street,
+                alias: esAddress.alias ?? '',
+                address_additional_street: esAddress.additional_street ?? '',
                 address_country: esAddress.country,
-                address_province: esAddress.province,
+                address_province: esAddress.province ?? '',
                 address_zip_code: esAddress.zip_code ?? '',
                 address_city: esAddress.city,
                 address_street: esAddress.street,

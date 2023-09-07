@@ -4,9 +4,10 @@ import { ElasticDocGroupRollbackable } from '../../src/definition/v3/ElasticDoc'
 
 const convertSolrToES = (solrAddress: SolrAddress): ElasticDocGroupRollbackable => {
     const now = new Date().toISOString()
+    const upperCaseOwner = solrAddress.owner.toUpperCase();
     const elasticDocGroup: ElasticDocGroupRollbackable = {
-        groupId: solrAddress.owner,
-        members: [solrAddress.owner],
+        groupId: upperCaseOwner,
+        members: [upperCaseOwner],
         addresses: [
             {
                 id: uuidv4(),
@@ -29,12 +30,12 @@ const convertSolrToES = (solrAddress: SolrAddress): ElasticDocGroupRollbackable 
                         phone_number: solrAddress.contact_phone_number,
                         email: solrAddress.contact_email,
                         name: solrAddress.contact_name,
-                        scores: [],
+                        scores: {},
                         created_at: now,
                         updated_at: now,
                     },
                 ],
-                scores: [],
+                scores: {},
                 created_at: now,
                 updated_at: now,
                 signature_for_rollback: solrAddress.signature

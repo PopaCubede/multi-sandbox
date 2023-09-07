@@ -1,128 +1,130 @@
 {
-    "properties": {
-        "id": {
-            "type": "text"
-        },
-        "groupId": {
-            "type": "text"
-        },
-        "members": {
-            "type": "text"
-        },
-        "addresses": {
-            "type": "nested",
-            "properties": {
-                "id": {
-                    "type": "text"
-                },
-                "alias": {
-                    "type": "text"
-                },
-                "street": {
-                    "type": "text"
-                },
-                "additional_street": {
-                    "type": "text"
-                },
-                "city": {
-                    "type": "text"
-                },
-                "zip_code": {
-                    "type": "text"
-                },
-                "province": {
-                    "type": "text"
-                },
-                "country": {
-                    "type": "text"
-                },
-                "timezone": {
-                    "type": "text"
-                },
-                "position": {
-                    "type": "nested",
-                    "properties": {
-                        "lat": {
-                            "type": "float"
-                        },
-                        "lon": {
-                            "type": "float"
-                        }
-                    }
-                },
-                "contacts": {
-                    "type": "nested",
-                    "properties": {
-                        "id": {
-                            "type": "text"
-                        },
-                        "company": {
-                            "type": "text"
-                        },
-                        "phone_number": {
-                            "type": "text"
-                        },
-                        "email": {
-                            "type": "text"
-                        },
-                        "name": {
-                            "type": "text"
-                        },
-                        "scores": {
-                            "type": "nested",
-                            "properties": {
-                                "id": {
-                                    "type": "text"
-                                },
-                                "value": {
-                                    "type": "integer"
-                                },
-                                "created_at": {
-                                    "type": "text"
-                                },
-                                "updated_at": {
-                                    "type": "text"
-                                }
+    "mappings": {
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "groupId": {
+                "type": "keyword"
+            },
+            "members": {
+                "type": "keyword"
+            },
+            "addresses": {
+                "type": "nested",
+                "properties": {
+                    "id": {
+                        "type": "keyword"
+                    },
+                    "alias": {
+                        "type": "text"
+                    },
+                    "street": {
+                        "type": "text"
+                    },
+                    "additional_street": {
+                        "type": "text"
+                    },
+                    "city": {
+                        "type": "text"
+                    },
+                    "zip_code": {
+                        "type": "text"
+                    },
+                    "province": {
+                        "type": "text"
+                    },
+                    "country": {
+                        "type": "text"
+                    },
+                    "timezone": {
+                        "type": "text"
+                    },
+                    "position": {
+                        "type": "nested",
+                        "properties": {
+                            "lat": {
+                                "type": "float"
+                            },
+                            "lon": {
+                                "type": "float"
                             }
-                        },
-                        "created_at": {
-                            "type": "text"
-                        },
-                        "updated_at": {
-                            "type": "text"
                         }
-                    }
-                },
-                "scores": {
-                    "type": "nested",
-                    "properties": {
-                        "id": {
-                            "type": "text"
-                        },
-                        "value": {
-                            "type": "integer"
-                        },
-                        "created_at": {
-                            "type": "text"
-                        },
-                        "updated_at": {
-                            "type": "text"
+                    },
+                    "contacts": {
+                        "type": "nested",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "company": {
+                                "type": "text"
+                            },
+                            "phone_number": {
+                                "type": "text"
+                            },
+                            "email": {
+                                "type": "text"
+                            },
+                            "name": {
+                                "type": "text"
+                            },
+                            "scores": {
+                                "type": "nested",
+                                "properties": {
+                                    "id": {
+                                        "type": "text"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "text"
+                                    },
+                                    "updated_at": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "created_at": {
+                                "type": "text"
+                            },
+                            "updated_at": {
+                                "type": "text"
+                            }
                         }
+                    },
+                    "scores": {
+                        "type": "nested",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "integer"
+                            },
+                            "created_at": {
+                                "type": "text"
+                            },
+                            "updated_at": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "created_at": {
+                        "type": "text"
+                    },
+                    "updated_at": {
+                        "type": "text"
                     }
-                },
-                "created_at": {
-                    "type": "text"
-                },
-                "updated_at": {
-                    "type": "text"
                 }
+            },
+            "created_at": {
+                "type": "text"
+            },
+            "updated_at": {
+                "type": "text"
             }
-        },
-        "created_at": {
-            "type": "text"
-        },
-        "updated_at": {
-            "type": "text"
         }
     }
 }

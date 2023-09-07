@@ -3,7 +3,7 @@ import AddressFilter from 'rtech-struct/definition/address-book/v3/AddressFilter
 import AdminAddressFilter from 'rtech-struct/definition/address-book/v3/AdminAddressFilter';
 import InputAddress from 'rtech-struct/definition/address-book/v3/InputAddress';
 import PaginatedAddresses from 'rtech-struct/definition/address-book/v3/PaginatedAddress';
-import { array, defaulted, integer, number, object, optional, size, string } from 'superstruct';
+import { array, defaulted, integer, number, object, optional, record, size, string } from 'superstruct';
 import { CommonError } from '../Error';
 import { EmailStruct, TimezoneStruct, UuidStruct, ZuluDateTimeStruct } from '../utils';
 const { v4: uuidV4 } = require('uuid');
@@ -21,7 +21,7 @@ const ContactStruct = object({
     phone_number: optional(size(string(), 1, 32)),
     email: optional(size(EmailStruct, 2, 128)),
     name: optional(size(string(), 1, 64)),
-    scores: array(ScoreStruct),
+    scores: record(string(), ScoreStruct),
     created_at: ZuluDateTimeStruct,
     updated_at: ZuluDateTimeStruct,
 });
@@ -59,7 +59,7 @@ const AddressStruct = object({
     position: PositionStruct,
     timezone: TimezoneStruct,
     contacts: optional(array(ContactStruct)),
-    scores: optional(array(ScoreStruct)),
+    scores: optional(record(string(), ScoreStruct)),
     created_at: ZuluDateTimeStruct,
     updated_at: ZuluDateTimeStruct,
 });
@@ -76,7 +76,7 @@ const AddressRollbackableStruct = object({
     position: PositionStruct,
     timezone: TimezoneStruct,
     contacts: optional(array(ContactStruct)),
-    scores: optional(array(ScoreStruct)),
+    scores: optional(record(string(), ScoreStruct)),
     created_at: ZuluDateTimeStruct,
     updated_at: ZuluDateTimeStruct,
     signature_for_rollback: string(),
